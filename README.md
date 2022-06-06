@@ -2,10 +2,10 @@ One to one user chat using html,socket and nodeJS
 
 
 /****************To start app*******
-# First Run This CMD
+# First Run This CMD To Install Node Modules
 npm install 
 
-#Second Run This CMD
+#Second Run This CMD To Start Server
 node app.js
 
 #After that open this url on  browser two tabs
