@@ -1,40 +1,34 @@
-const express = require('express')
-const app = express()
-
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
 //set the template engine ejs
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 //middlewares
-app.use(express.static('public'))
-
+app.use(express.static('public'));
 
 //routes
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index');
 })
 
 //Listen on port 3000
-server = app.listen(3000)
-
+server = app.listen(3000);
 console.log("Server is running on port 3000");
 
 //socket.io instantiation
-const io = require("socket.io")(server)
-
-
+const io = require("socket.io")(server);
 //listen on every connection
 io.on('connection', (socket) => {
-    console.log('New user connected')
-
+    console.log('New user connected');
     //default username
-    socket.username = "Anonymous"
+    socket.username = "Anonymous";
 
     //listen on change_username
     socket.on('change_username', (data) => {
-        socket.username = data.username
-    })
-
+        socket.username = data.username;
+    });
     //listen on new_message
     socket.on('new_message', (data) => {
         //broadcast the new message
@@ -43,6 +37,7 @@ io.on('connection', (socket) => {
 
     //listen on typing
     socket.on('typing', (data) => {
-        socket.broadcast.emit('typing', { username: socket.username })
+        console.log('Typing',socket.username);
+        socket.broadcast.emit('typing', { username: socket.username });
     })
 })
